@@ -1,0 +1,15 @@
+#!/bin/tcsh -f
+if ($#argv != 2 | "$1" =~ -*h*) then
+    echo "Usage: $0:t YEAR MO"
+    echo "Returns the number of days in that month, for that year (leap-year compliant)"
+    exit
+endif
+
+set yr = $1
+set mo = $2
+
+set DaysInMth = (31 28 31 30 31 30 31 31 30 31 30 31)
+if (`expr $yr % 4` == 0) set DaysInMth[2] = 29 # leap year, Y2K compliant
+
+echo $DaysInMth[$mo]
+
